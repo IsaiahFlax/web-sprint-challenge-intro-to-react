@@ -4,6 +4,7 @@ import axios from 'axios';
 import Films from './Films';
 import Vehicles from './Vehicles';
 import Starships from './Starships';
+import Images from './Images';
 
 //Styling
 const CharacterCard = styled.div`
@@ -150,10 +151,28 @@ const ListOfCharacters = ( { character } ) => {
     console.error('Promise ERROR', error.message)
     });
 
+    const images = [
+        './images/lukesw.jpg',
+        './images/c3posw.jpg',
+        './images/r2d2sw.jpg',
+        './images/darthsw.jpg',
+        './images/leiasw.jpg',
+        './images/owensw.jpg',
+        './images/berusw.jpg',
+        './images/r5d4sw.jpg',
+        './images/biggssw.jpg',
+        './images/obisw.jpg'
+    ];
+
     return (
 
     <CharacterCard>
         <h2>Name: {character.name} </h2>
+
+        {images.forEach((image, index) => {
+            return  <Images key={index} src={image} />
+        })}
+
         <FirstCharacterColumn>
         <SecondCharacterColumn>
         <Par>Gender: {character.gender} </Par>
