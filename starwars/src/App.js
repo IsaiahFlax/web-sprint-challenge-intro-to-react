@@ -15,6 +15,12 @@ const AppContainer = styled.div`
       bottom: 0;
 `;
 
+const Button = styled.button`
+  &:hover {
+    background-color: yellow;
+  }
+`;
+
 //Declaring the Component
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -25,10 +31,11 @@ const App = () => {
   // sync up with, if any.
 
   const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState([]);
 
   useEffect(() => {
 
-    axios.get("https://swapi.dev/api/people/")
+    axios.get(`https://swapi.dev/api/people/?page=${page}`)
 
     .then(response => {
       // console.log('Yay you got the data from the API!', response.data.results);
@@ -39,7 +46,7 @@ const App = () => {
       console.log('You have error message here', error)
     })
 
-  }, []);
+  }, [page]);
 
   //Use of Promise.all
   Promise.all([characters])
@@ -58,6 +65,15 @@ const App = () => {
     <div>
     <AppContainer>
       <h1 className="Header">Characters</h1>
+      <Button onClick={() => setPage("1")}>1</Button>
+      <Button onClick={() => setPage("2")}>2</Button>
+      <Button onClick={() => setPage("3")}>3</Button>
+      <Button onClick={() => setPage("4")}>4</Button>
+      <Button onClick={() => setPage("5")}>5</Button>
+      <Button onClick={() => setPage("6")}>6</Button>
+      <Button onClick={() => setPage("7")}>7</Button>
+      <Button onClick={() => setPage("8")}>8</Button>
+      <Button onClick={() => setPage("9")}>9</Button>
       </AppContainer>
       <div>
       <Character characters={characters}/>

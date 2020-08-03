@@ -151,6 +151,7 @@ const ListOfCharacters = ( { character } ) => {
     console.error('Promise ERROR', error.message)
     });
 
+    //Adding images manually
     const images = [
         './images/lukesw.jpg',
         './images/c3posw.jpg',
@@ -170,7 +171,7 @@ const ListOfCharacters = ( { character } ) => {
         <h2>Name: {character.name} </h2>
 
         {images.forEach((image, index) => {
-            return  <Images key={index} src={image} />
+            return  <Images key={index} image={image} />
         })}
 
         <FirstCharacterColumn>
