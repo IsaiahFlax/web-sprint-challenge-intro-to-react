@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
+import Films from './Films';
 
 const CharacterCard = styled.div`
     margin: 10%;
@@ -45,6 +46,30 @@ const ListOfCharacters = ( { character } ) => {
         })
     }, [])
 
+    const [films, setFilms] = useState([]);
+
+    const filmsURL = character.films;
+
+    useEffect(() => {
+       
+        {filmsURL.forEach(item => {
+           
+            axios.get(item)
+            .then(response => {
+                // console.log('films success here', response.data);
+                films.push(response.data.title);
+                console.log(films);
+    
+            })
+            .catch(error => {
+                console.log('films error here', error);
+            })
+
+
+        })}
+
+    }, []);
+
     return (
 
     <CharacterCard>
@@ -61,7 +86,11 @@ const ListOfCharacters = ( { character } ) => {
         <ThirdCharacterColumn>
         <Par>Birth Year: {character.birth_year} </Par>
         <Par>Homeworld: {homeworld} </Par>
-        <Par>Films: {character.films} </Par>
+
+        {films.map((film, index) => {
+            return  <Films key={index} film={film} />
+        })}
+       
         <Par>Vehicles: {character.vehicles}</Par>
         <Par>Starships: {character.starships} </Par>
         <Par>Species: {character.species} </Par>
