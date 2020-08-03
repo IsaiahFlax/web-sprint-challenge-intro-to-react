@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from "styled-components";
 
+const Image = styled.img`
+    width: 30%;
+    height: 30%;
+`;
+
 
 const Images = ( { image } ) => {
 
     return (
     
-        <img src={image}></img>
+        <Image src={image}></Image>
     
     )
     

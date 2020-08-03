@@ -9,8 +9,8 @@ import Images from './Images';
 //Styling
 const CharacterCard = styled.div`
     margin: 10%;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     justify-content: center;
     align-items: center;
     padding: 2.5%;
@@ -33,8 +33,29 @@ const Par = styled.p`
    word-wrap: break-word; 
 `;
 
+ //Adding images manually
+
+
 //Declaring the Component
 const ListOfCharacters = ( { character } ) => {
+
+    const images = [
+        './images/lukesw.jpg',
+        './images/c3posw.jpg',
+        './images/r2d2sw.jpg',
+        './images/darthsw.jpg',
+        './images/leiasw.jpg',
+        './images/owensw.jpg',
+        './images/berusw.jpg',
+        './images/r5d4sw.jpg',
+        './images/biggssw.jpg',
+        './images/obisw.jpg'
+    ];
+
+    const [photos, setPhotos] = useState([images]);
+    console.log('Photos here', photos);
+    // setPhotos=(photos);
+   
 
     //Homeworld API
     const [homeworld, setHomeworld] = useState([]);
@@ -151,27 +172,15 @@ const ListOfCharacters = ( { character } ) => {
     console.error('Promise ERROR', error.message)
     });
 
-    //Adding images manually
-    const images = [
-        './images/lukesw.jpg',
-        './images/c3posw.jpg',
-        './images/r2d2sw.jpg',
-        './images/darthsw.jpg',
-        './images/leiasw.jpg',
-        './images/owensw.jpg',
-        './images/berusw.jpg',
-        './images/r5d4sw.jpg',
-        './images/biggssw.jpg',
-        './images/obisw.jpg'
-    ];
+   
 
     return (
 
     <CharacterCard>
         <h2>Name: {character.name} </h2>
 
-        {images.forEach((image, index) => {
-            return  <Images key={index} image={image} />
+        {photos.forEach((image) => {
+            return  <Images src={image} />
         })}
 
         <FirstCharacterColumn>
