@@ -1,40 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
+import axios from 'axios';
 
 const CharacterCard = styled.div`
     margin: 10%;
     background-color: black;
     color: white;
-    padding: 2.5%;
     justify-content: center;
     align-items: center;
+    padding: 2.5%;
+    overflow: hidden;
 
 `;
 
 const FirstCharacterColumn = styled.div`
     display: flex;
-    justify-content: space-evenly;
+    column-gap: 50%;
     
 `;
 
 const SecondCharacterColumn = styled.div`
-    width: 50%;
-    
+
 `;
 
 const ThirdCharacterColumn = styled.div`
-    width: 50%%;
 `;
 
 const Par = styled.p`
-    align-items: center;
-    text-align: justify;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-evenly;
+   word-wrap: break-word;
+   
 `;
 
 const ListOfCharacters = ( { character } ) => {
+
+    const [homeworld, setHomeworld] = useState([]);
+
+    const homeworldURL = character.homeworld;
+    
+    useEffect(() => {
+        axios.get(homeworldURL)
+        .then(response => {
+            console.log(response.data.name);
+            setHomeworld(response.data.name);
+        })
+    }, [])
 
     return (
 
@@ -51,7 +60,7 @@ const ListOfCharacters = ( { character } ) => {
         </SecondCharacterColumn>
         <ThirdCharacterColumn>
         <Par>Birth Year: {character.birth_year} </Par>
-        <Par>Homeworld: {character.homeworld} </Par>
+        <Par>Homeworld: {homeworld} </Par>
         <Par>Films: {character.films} </Par>
         <Par>Vehicles: {character.vehicles}</Par>
         <Par>Starships: {character.starships} </Par>
