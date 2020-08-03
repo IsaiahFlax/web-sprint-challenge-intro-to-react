@@ -19,6 +19,7 @@ const App = () => {
 
     .then(response => {
       console.log('Yay you got the data from the API!', response.data.results);
+      setCharacters(response.data.results);
     })
 
     .catch(error => {
@@ -30,7 +31,7 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
-      <Character />
+      <Character characters={characters}/>
     </div>
   );
 }
