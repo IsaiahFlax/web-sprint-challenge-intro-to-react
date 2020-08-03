@@ -5,6 +5,7 @@ import Films from './Films';
 import Vehicles from './Vehicles';
 import Starships from './Starships';
 
+//Styling
 const CharacterCard = styled.div`
     margin: 10%;
     background-color: black;
@@ -13,17 +14,14 @@ const CharacterCard = styled.div`
     align-items: center;
     padding: 2.5%;
     overflow: hidden;
-
 `;
 
 const FirstCharacterColumn = styled.div`
     display: flex;
-    column-gap: 50%;
-    
+    column-gap: 50%;  
 `;
 
 const SecondCharacterColumn = styled.div`
-
 `;
 
 const ThirdCharacterColumn = styled.div`
@@ -31,12 +29,13 @@ const ThirdCharacterColumn = styled.div`
 `;
 
 const Par = styled.p`
-   word-wrap: break-word;
-   
+   word-wrap: break-word; 
 `;
 
+//Declaring the Component
 const ListOfCharacters = ( { character } ) => {
 
+    //Homeworld API
     const [homeworld, setHomeworld] = useState([]);
 
     const homeworldURL = character.homeworld;
@@ -44,7 +43,7 @@ const ListOfCharacters = ( { character } ) => {
     useEffect(() => {
         axios.get(homeworldURL)
         .then(response => {
-            console.log(response.data.name);
+            // console.log(response.data.name);
             setHomeworld(response.data.name);
         })
         .catch(error => {
@@ -52,6 +51,7 @@ const ListOfCharacters = ( { character } ) => {
         })
     }, [])
 
+    //Species API
     const [species, setSpecies] = useState([]);
 
     const speciesdURL = character.species;
@@ -59,7 +59,7 @@ const ListOfCharacters = ( { character } ) => {
     useEffect(() => {
         axios.get(speciesdURL)
         .then(response => {
-            console.log(response.data.name);
+            // console.log(response.data.name);
             setSpecies(response.data.name);
         })
         .catch(error => {
@@ -67,7 +67,7 @@ const ListOfCharacters = ( { character } ) => {
         })
     }, [])
 
-
+    //Films API
     const [films, setFilms] = useState([]);
 
     const filmsURL = character.films;
@@ -80,7 +80,7 @@ const ListOfCharacters = ( { character } ) => {
             .then(response => {
                 // console.log('films success here', response.data);
                 films.push(response.data.title);
-                console.log(films);
+                // console.log(films);
     
             })
             .catch(error => {
@@ -92,6 +92,7 @@ const ListOfCharacters = ( { character } ) => {
 
     }, []);
 
+    //Vehicles API
     const [vehicles, setVehicles] = useState([]);
 
     const vehiclesURL = character.vehicles;
@@ -104,18 +105,18 @@ const ListOfCharacters = ( { character } ) => {
             .then(response => {
                 // console.log('films success here', response.data);
                 vehicles.push(response.data.name);
-                console.log(vehicles);
+                // console.log(vehicles);
     
             })
             .catch(error => {
                 console.log('films error here', error);
             })
 
-
         })}
 
     }, []);
 
+    //Starships API
     const [starships, setStarships] = useState([]);
 
     const starshipsURL = character.starships;
@@ -128,7 +129,7 @@ const ListOfCharacters = ( { character } ) => {
             .then(response => {
                 // console.log('films success here', response.data);
                 starships.push(response.data.name);
-                console.log(starships);
+                // console.log(starships);
     
             })
             .catch(error => {
@@ -139,6 +140,15 @@ const ListOfCharacters = ( { character } ) => {
         })}
 
     }, []);
+
+    //Use of Promise.All
+    Promise.all([homeworld, films, starships, species, vehicles])
+    .then(values => { 
+    console.log('Promise MADE', values);
+    })
+    .catch(error => { 
+    console.error('Promise ERROR', error.message)
+    });
 
     return (
 
